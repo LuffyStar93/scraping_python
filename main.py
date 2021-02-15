@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from db import insert_jordan
 
+
 my_data = []
 html_text = requests.get('https://www.nike.com/fr/w/hommes-jordan-chaussures-37eefznik1zy7ok').text
 soup = BeautifulSoup(html_text, 'lxml')
