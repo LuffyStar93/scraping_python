@@ -1,0 +1,4 @@
+requests == 2.7.0
+mysql-connector-python
+lxml
+beautifulsoup4
