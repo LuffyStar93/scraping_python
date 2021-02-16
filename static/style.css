@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    font-size: 42px;
+    margin: 20px 0px;
+    text-align: center;
+}
+table{
+    width: 100%;
+    font-weight: bold;
+}
+
+thead{
+    height: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  th, td {
+    padding: 15px;
+  }
+
+  th{
+      padding: 20px;
+      background: darkblue;
+      color: white;
+      font-size: 18px;
+  }
+
+  td{
+      background: lightgray;
+  }
