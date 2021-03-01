@@ -3,7 +3,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="ms",
   user="root",
-  password="",
+  password="pw",
   database="shoes_db"
 )
 
@@ -11,7 +11,7 @@ print(mydb)
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE TABLE IF NOT EXISTS jordan (id INT AUTO_INCREMENT PRIMARY KEY, img_src VARCHAR(255), name VARCHAR(255), type VARCHAR(255), nbr_color VARCHAR(255), price DECIMAL)")
+mycursor.execute("CREATE TABLE IF NOT EXISTS jordan (id INT AUTO_INCREMENT PRIMARY KEY, img_src VARCHAR(255), name VARCHAR(255), type VARCHAR(255), nbr_color VARCHAR(255), price VARCHAR(255))")
 
 def insert_jordan(value_data):
     sql = "INSERT INTO jordan (img_src, name, type, nbr_color, price) VALUES (%s, %s, %s, %s, %s)"

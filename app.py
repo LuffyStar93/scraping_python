@@ -1,23 +1,35 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for, jsonify
+from flask_cors import CORS
 from db import mydb
+import logging
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def index():
-    return "Hello World!"
-
-@app.route('/test', methods=["POST"])
-def test():
-    return 'ma route /test'
+    return  redirect(url_for('shop'))
 
 @app.route("/shop")
-def page():
+def shop():
+    return render_template('page1.html')
+
+@app.route("/jordan", methods=['GET'])
+def jordan():
     cursor = mydb.cursor()
     sql = "SELECT * FROM jordan"
     cursor.execute(sql)
     results = cursor.fetchall()
-    return render_template('page1.html', name="max", age=24, len = len(results), results=results)
+    return jsonify(results)
 
+@app.route('/login')
+def login():
+    username = request.args.get('username')
+    if( username == None ):
+        return ""
+    else:
+        return username
 
 if __name__ == "__main__":
+    logging.basicConfig(filename='error.log',level=logging.DEBUG)
     app.run(host="0.0.0.0", port=3000, debug=True)

@@ -38,3 +38,8 @@ table, th, td {
   td{
       background: lightgray;
   }
+
+  img{
+      width: 100px;
+      height: 100px;
+  }

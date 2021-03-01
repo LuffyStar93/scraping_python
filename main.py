@@ -14,7 +14,7 @@ for shoe in shoes:
     shoe_name = shoe.find('div', class_ = "product-card__title").text
     shoe_type = shoe.find('div', class_ = "product-card__subtitle").text
     shoe_color = shoe.find('div', class_ = "product-card__product-count").text
-    shoe_price = float(shoe.find('div', class_ = "product-card__price").text[:-2].replace(',', '.'))
+    shoe_price = shoe.find('div', class_ = "product-card__price").text[:-2].replace(',', '.')
     my_data.append((shoe_img_src, shoe_name, shoe_type, shoe_color, shoe_price))
     # print(f'''
     # Shoe image : {shoe_img_src},

@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Document</title>
+    <title>J's Shop</title>
 </head>
 <body>
 <h1>J's Shop</h1>
-<!-- <p>{{results}}</p> -->
-
-
 <table>
     <thead>
         <tr>
@@ -22,17 +19,8 @@
         </tr>
     </thead>
     <tbody>
-        {%for i in range(0, len)%} 
-        <tr>
-            <td><img style="width: 100px;height: 100px;" src="{{results[i][1]}}" alt=""></td>
-            <td>{{results[i][2]}}</td>
-            <td>{{results[i][3]}}</td>
-            <td>{{results[i][4]}}</td>
-            <td>{{results[i][5]}} €</td>
-        </tr>
-        {%endfor%} 
     </tbody>
 </table>
-
 </body>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </html>
