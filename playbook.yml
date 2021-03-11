@@ -52,22 +52,19 @@
           - lxml
         executable: pip3
 
-    # - name: Create deploy user for mysql
-    #   mysql_user: user="deploy" host="%" password=123 priv=*.*:ALL,GRANT
+    - name: Ensure anonymous users are not in the database
+      mysql_user: user='' host=$item state=absent
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
 
-    # - name: Ensure anonymous users are not in the database
-    #   mysql_user: user='' host=$item state=absent
-    #   with_items:
-    #     - 127.0.0.1
-    #     - ::1
-    #     - localhost
-
-    # - name: Update mysql root password for all root accounts
-    #   mysql_user: name=root host={{item}} password=123
-    #   with_items:
-    #     - 127.0.0.1
-    #     - ::1
-    #     - localhost
+    - name: Update mysql root password for all root accounts
+      mysql_user: name=root host={{item}} password=123
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
 
     - name: Clone a repo git
       git:
@@ -78,3 +75,6 @@
       file:
         path: /home/maxime/scraping/error.log
         mode: 0777
+
+    - name: Execute main.py (scrap)
+      command: python3 /home/maxime/scraping/main.py
