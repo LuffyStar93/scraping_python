@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, jsonify
 from flask_cors import CORS
 from db import mydb
 import logging
+
 app = Flask(__name__)
 CORS(app)
 
@@ -10,9 +11,17 @@ CORS(app)
 def index():
     return  redirect(url_for('shop'))
 
+# @app.route("/shop")
+# def shop():
+#     return render_template('page1.html')
+
 @app.route("/shop")
-def shop():
-    return render_template('page1.html')
+def page():
+    cursor = mydb.cursor()
+    sql = "SELECT * FROM jordan"
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    return render_template('page1.html', name="max", age=24, len = len(results), results=results)
 
 @app.route("/jordan", methods=['GET'])
 def jordan():

@@ -19,8 +19,17 @@
         </tr>
     </thead>
     <tbody>
+        {%for i in range(0, len)%} 
+        <tr>
+            <td><img style="width: 100px;height: 100px;" src="{{results[i][1]}}" alt=""></td>
+            <td>{{results[i][2]}}</td>
+            <td>{{results[i][3]}}</td>
+            <td>{{results[i][4]}}</td>
+            <td>{{results[i][5]}} €</td>
+        </tr>
+        {%endfor%} 
     </tbody>
 </table>
 </body>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
 </html>

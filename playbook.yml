@@ -1,0 +1,84 @@
+---
+- name: Intro Ansible
+  hosts: VMAzure
+  remote_user: maxime
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+    - name: Installation de git
+      apt: 
+        name: git 
+        update_cache: yes
+        state: latest
+
+    - name: installation de mysql-server
+      apt: 
+        name: mysql-server
+        state: latest
+
+    - name: installation de python-mysqldb
+      apt: 
+        name: python-mysqldb
+        state: latest
+
+    - name: installation de pip
+      apt:
+        name: python-pip
+        state: latest
+
+    - name: installation de pip3
+      apt:
+        name: python3-pip
+        state: latest
+
+    - name: Installation des packages python sur pip2
+      pip:
+        name: 
+          - Flask
+          - Flask-Cors
+          - mysql-connector-python
+          - beautifulsoup4
+          - lxml
+
+    - name: Installation des packages python sur pip3
+      pip:
+        name: 
+          - Flask
+          - Flask-Cors
+          - mysql-connector-python
+          - beautifulsoup4
+          - lxml
+        executable: pip3
+
+    # - name: Create deploy user for mysql
+    #   mysql_user: user="deploy" host="%" password=123 priv=*.*:ALL,GRANT
+
+    - name: Ensure anonymous users are not in the database
+      mysql_user: user='' host=$item state=absent
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+
+    - name: Update mysql root password for all root accounts
+      mysql_user: name=root host={{item}} password=123
+      with_items:
+        - 127.0.0.1
+        - ::1
+        - localhost
+    
+    # - name: Modification du mot de passe de postgres
+    #   become: yes
+    #   become_method: sudo
+    #   become_user: postgres
+    #   postgresql_user: 
+    #     db: postgres
+    #     name: postgres
+    #     password: "123" 
+
+    - name: Clone a repo git
+      git:
+        repo: https://github.com/LuffyStar93/scraping_python.git
+        dest: /home/maxime/scraping
