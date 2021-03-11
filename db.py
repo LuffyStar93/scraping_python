@@ -7,7 +7,7 @@ mydb = mysql.connector.connect(
   database="shoes_db"
 )
 
-print(mydb)
+# print(mydb)
 
 mycursor = mydb.cursor()
 

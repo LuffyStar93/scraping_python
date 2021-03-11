@@ -55,30 +55,26 @@
     # - name: Create deploy user for mysql
     #   mysql_user: user="deploy" host="%" password=123 priv=*.*:ALL,GRANT
 
-    - name: Ensure anonymous users are not in the database
-      mysql_user: user='' host=$item state=absent
-      with_items:
-        - 127.0.0.1
-        - ::1
-        - localhost
+    # - name: Ensure anonymous users are not in the database
+    #   mysql_user: user='' host=$item state=absent
+    #   with_items:
+    #     - 127.0.0.1
+    #     - ::1
+    #     - localhost
 
-    - name: Update mysql root password for all root accounts
-      mysql_user: name=root host={{item}} password=123
-      with_items:
-        - 127.0.0.1
-        - ::1
-        - localhost
-    
-    # - name: Modification du mot de passe de postgres
-    #   become: yes
-    #   become_method: sudo
-    #   become_user: postgres
-    #   postgresql_user: 
-    #     db: postgres
-    #     name: postgres
-    #     password: "123" 
+    # - name: Update mysql root password for all root accounts
+    #   mysql_user: name=root host={{item}} password=123
+    #   with_items:
+    #     - 127.0.0.1
+    #     - ::1
+    #     - localhost
 
     - name: Clone a repo git
       git:
         repo: https://github.com/LuffyStar93/scraping_python.git
         dest: /home/maxime/scraping
+
+    - name: Edition des droit du fichiers logs
+      file:
+        path: /home/maxime/scraping/error.log
+        mode: 0777
